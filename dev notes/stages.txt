@@ -1,0 +1,122 @@
+1. Local PC Assistant
+
+Learn:
+
+subprocess
+pathlib
+psutil
+asyncio
+logging
+
+Features:
+
+Open apps
+Close apps
+Read system information
+Monitor CPU/RAM
+Search files
+Schedule tasks
+2. AI Layer
+
+Learn:
+
+Function calling / tool execution
+Conversation memory
+Prompt engineering
+Streaming responses
+
+Features:
+
+Natural language commands
+Planning
+Tool selection
+Persistent memory
+3. Plugin Architecture
+
+Learn:
+
+Dynamic imports
+Interfaces/abstract base classes
+Configuration management
+
+Features:
+
+Add new capabilities without changing the core
+Example plugins:
+Music
+Weather
+File manager
+Android controller
+4. Networking
+
+Learn:
+
+HTTP
+WebSockets
+TCP sockets
+
+Features:
+
+Talk to other devices
+Remote control
+Real-time communication
+5. Android Agent (Kotlin)
+
+Only when you actually start phone integration.
+
+Features:
+
+Battery status
+Notifications
+Camera
+Flashlight
+GPS
+Clipboard
+File transfer
+6. Voice
+
+Learn:
+
+Wake word detection
+Speech-to-text
+Text-to-speech
+
+Features:
+
+"Jarvis..."
+Continuous listening
+Spoken responses
+7. Vision
+
+Learn:
+
+OpenCV
+MediaPipe
+
+Features:
+
+Gesture control
+Face recognition
+Object detection
+One thing I would add that many people overlook
+
+You're aiming to build something that will grow over months or years. That makes software architecture almost as important as programming.
+
+Start learning:
+
+Project structure
+Design patterns (Factory, Observer, Strategy, Command)
+Dependency injection (at least the concept)
+Event-driven architecture
+State machines
+
+These directly affect whether your project stays manageable as it grows.
+
+What I would not spend time on right now
+❌ React (unless you want to become a frontend developer)
+❌ CSS animations
+❌ Game development
+❌ TensorFlow/PyTorch from scratch
+❌ Kubernetes
+❌ Microservices (far too early)
+❌ C++ (until you hit a real limitation with Python/C)

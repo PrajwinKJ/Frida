@@ -1,0 +1,125 @@
+Things Android allows
+
+Without root you can generally do:
+
+✅ Battery percentage
+
+✅ Clipboard
+
+✅ Vibrate
+
+✅ Flashlight
+
+✅ Notifications
+
+✅ Send notifications
+
+✅ Play media
+
+✅ Record microphone (with permission)
+
+✅ Camera (with permission)
+
+✅ GPS
+
+✅ Contacts (permission)
+
+✅ SMS (permission)
+
+✅ Call logs (permission)
+
+✅ Installed apps
+
+✅ Files
+
+✅ Wi-Fi information
+
+✅ Bluetooth
+
+Things Android restricts
+
+For security, apps generally cannot:
+
+❌ Tap anywhere on screen
+
+❌ Press arbitrary buttons
+
+❌ Read every app's data
+
+❌ Read WhatsApp chats directly
+
+❌ Read banking apps
+
+❌ Unlock phone
+
+❌ Install apps silently
+
+If you want automation
+
+Android provides an Accessibility Service.
+
+This is how apps like
+
+Tasker
+MacroDroid
+Automate
+
+perform actions.
+
+It can
+
+press buttons
+scroll
+click
+type text
+inspect UI elements
+
+Google reviews apps using Accessibility carefully, so it should only be used for legitimate accessibility or automation purposes.
+
+If you want full control
+
+ADB (Android Debug Bridge).
+
+Jarvis
+    │
+ADB
+    │
+Android
+
+You can
+
+install apps
+launch activities
+capture screenshots
+simulate input events
+inspect logs
+transfer files
+
+Some actions require USB debugging or wireless debugging to be enabled, and some commands have additional permission or root requirements.
+Features I would implement in order
+Phase 1
+Battery
+Charging status
+Clipboard
+Flashlight
+Notifications
+File transfer
+Phase 2
+Camera
+GPS
+Contacts
+SMS
+Phone calls
+Microphone
+Phase 3
+Screen streaming
+Accessibility automation
+App launching
+Media control
+Voice interaction
+Phase 4
+Continuous sensor streaming
+Device health
+Geofencing
+Wearable integration
+Cross-device memory

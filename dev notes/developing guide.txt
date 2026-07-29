@@ -1,0 +1,129 @@
+Chapter 1 — Basics ✅
+✔ What subprocess is
+✔ subprocess.run()
+✔ Arguments
+✔ capture_output
+✔ stdout
+✔ returncode
+✔ Security (shell=True)
+
+You've completed this.
+
+Chapter 2 — CompletedProcess
+
+When you call:
+
+result = subprocess.run(...)
+
+What exactly is result?
+
+We'll explore:
+
+stdout
+stderr
+returncode
+args
+check_returncode()
+
+You'll understand every attribute of the object Python returns.
+
+Chapter 3 — Standard Streams
+
+One of the most misunderstood topics.
+
+You'll learn:
+
+stdin
+stdout
+stderr
+Pipes
+Redirecting output
+Feeding input into another process
+
+This is how commands like these work:
+
+cat file.txt | grep hello
+
+and eventually how Jarvis can communicate with command-line tools.
+
+Chapter 4 — Errors
+
+Professional error handling.
+
+Topics include:
+
+check=True
+CalledProcessError
+FileNotFoundError
+TimeoutExpired
+
+Instead of silently failing, Jarvis will know exactly why a command failed.
+
+Chapter 5 — Timeouts
+
+Example:
+
+subprocess.run(..., timeout=5)
+
+Suppose a command hangs forever.
+
+Jarvis shouldn't freeze.
+
+It should terminate the command after a timeout.
+
+Chapter 6 — Environment Variables
+
+How to run a process with custom environment variables.
+
+This becomes important for:
+
+API keys
+PATH
+Java
+Android SDK
+CUDA
+Python virtual environments
+Chapter 7 — Working Directory
+
+Example:
+
+subprocess.run(
+    ["git", "status"],
+    cwd="/home/prajwinkj/Jarvis"
+)
+
+Jarvis can execute commands in any folder without changing its own current directory.
+
+Chapter 8 — Popen
+
+This is where things become really interesting.
+
+Unlike run():
+
+subprocess.Popen(...)
+
+starts a process and immediately returns control.
+
+Examples:
+
+Launch Chrome
+Launch VS Code
+Launch Spotify
+
+Jarvis keeps running while those applications stay open.
+
+Chapter 9 — Real Jarvis Projects
+
+We'll build actual tools.
+
+For example:
+
+open_chrome()
+close_chrome()
+list_usb_devices()
+adb_devices()
+take_screenshot()
+git_status()
+ping_server()
+
+By this point, you'll stop thinking of subprocess as a Python module and start seeing it as the bridge between Jarvis and the operating system.

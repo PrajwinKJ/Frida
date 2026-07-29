@@ -1,0 +1,111 @@
+Foundation
+│
+├── Project Structure
+├── Logging
+├── Configuration
+├── subprocess
+├── pathlib
+├── psutil
+├── asyncio
+├── Scheduler
+├── Plugin System
+└── Local AI Integratio
+
+
+Module 1 — Foundation
+Project Structure
+
+Packages
+
+Virtual Environments
+
+Logging
+
+Config Files
+
+Module 2 — PC Control
+subprocess
+
+Environment Variables
+
+Processes
+
+Signals
+
+Opening Apps
+
+Closing Apps
+
+Module 3 — Files
+pathlib
+
+Searching
+
+Reading
+
+Writing
+
+Copy
+
+Move
+
+Delete
+
+Module 4 — System Monitoring
+psutil
+
+CPU
+
+RAM
+
+Disk
+
+Battery
+
+Network
+
+Running Processes
+
+Module 5 — Concurrency
+Threads
+
+asyncio
+
+Events
+
+Background Tasks
+
+Module 6 — Scheduler
+Time
+
+datetime
+
+sched
+
+APScheduler (later)
+
+Module 7 — Plugin System
+Build Jarvis like this:
+
+Jarvis
+
+├── Browser Plugin
+
+├── Music Plugin
+
+├── File Plugin
+
+├── Weather Plugin
+
+├── AI Plugin
+
+└── System Plugin
+Module 8 — AI
+Finally connect
+
+Gemini
+
+OpenAI
+
+or local models
+

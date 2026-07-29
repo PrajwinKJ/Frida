@@ -1,0 +1,6 @@
+/config
+.venv
+__pycache__
+/logs
+/websockets 
+*.ipynb
