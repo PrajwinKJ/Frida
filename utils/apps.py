@@ -4,15 +4,15 @@ import logging
 from pathlib import Path as path
 from discovery.app_scanner import scan_apps
 import psutil
+from core.schema import tool
 
 log_file=path(__file__).resolve().parent.parent/"logs/apps.log"
 logging.basicConfig(filename=log_file,level=logging.INFO,format="%(asctime)s | %(levelname)s | %(message)s")
 pdir=path(__file__).resolve().parent.parent
 app_path=pdir/"config/apps.json"
 
-
+@tool("Open an installed application by providing the app name")
 def open_app(app_name: str):
-    """Open an installed application b providing the app name"""
     logging.info(f'Opening application: {app_name}')
     print(app_name)
     try:
@@ -28,9 +28,9 @@ def open_app(app_name: str):
     except:
         logging.exception(f'Failed to open {app_name}')
     
-
+@tool("Close an existing session of an application by providing the app name")
 def close_app(app_name: str):
-    """Close an existing session of an application by providing the app name"""
+    print("closing")
     if not app_path.exists():
         scan_apps()
     with open(app_path,'r') as file:
@@ -43,7 +43,7 @@ def close_app(app_name: str):
                 pass
 
     for process in psutil.process_iter(['pid','name']):
-        if app_name == process.info['name']:
+        if app_name in process.info['name']:
             logging.info(f"Closing {app_name}")
             process.terminate()
             try:

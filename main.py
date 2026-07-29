@@ -1,20 +1,37 @@
-from google import genai
-from dotenv import load_dotenv
 import os
-from utils import apps
+from dotenv import load_dotenv
+from core.schema import tool_registry
+import utils.apps
+load_dotenv('config/.env')
+import json
 
-load_dotenv("config/.env")
+from groq import Groq
 
-key=os.getenv('gemini_key')
+tools=[tools['schema'] for tools in tool_registry.values()]
 
-client=genai.Client(api_key=key)
-tools=[apps.open_app,apps.close_app]
-
+client = Groq(
+    api_key=os.getenv('groq_key'),
+)
 while True:
     prompt=input("You: ")
-    interaction=client.models.generate_content(model='gemini-flash-latest',
-                                       contents=prompt,config={
-                                           "tools": tools
-                                       })
-    output=interaction.text
-    print(f'Gemini: {output}')
+    if not prompt.lower()=='exit':
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="llama-3.3-70b-versatile",
+            tools=tools,
+            tool_choice='auto'
+        )
+
+        chat=chat_completion.choices[0].message
+        arguments=chat.tool_calls
+        if arguments:
+            fn=arguments[0].function.name
+            arg=json.loads(arguments[0].function.arguments)
+            tool_registry[fn]['function'](arg['app_name'])
+        else:
+            print(f"Jarvis: {chat.content}")
