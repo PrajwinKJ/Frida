@@ -32,6 +32,7 @@ while True:
         if arguments:
             fn=arguments[0].function.name
             arg=json.loads(arguments[0].function.arguments)
+            print(arg)
             tool_registry[fn]['function'](arg['app_name'])
         else:
             print(f"Jarvis: {chat.content}")

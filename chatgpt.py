@@ -12,7 +12,6 @@ load_dotenv('config/.env')
 client = OpenAI(
     api_key=os.getenv('groq_key'),
     base_url="https://api.groq.com/openai/v1",
-
 )
 
 while True:
@@ -36,6 +35,8 @@ while True:
     if arguments:
         fn=arguments[0].function.name
         arg=json.loads(arguments[0].function.arguments)
-        tool_registry[fn]['function'](arg['app_name'])
+        reply=tool_registry[fn]['function'](arg['app_name'])
+        if reply:
+            print(f"{reply}")
     else:
         print(f"Jarvis: {chat.content}")
