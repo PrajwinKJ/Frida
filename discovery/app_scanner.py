@@ -21,10 +21,15 @@ def scan_apps():
             parser.read(file)
             name=parser['Desktop Entry'].get('Name')
             exec_cmd=parser['Desktop Entry'].get('Exec')
-
-            if name and exec_cmd:
+            no_disp=parser['Desktop Entry'].get('NoDisplay')
+            kill_name=''
+            if name.lower()=='google chrome':
+                 kill_name='chrome'
+            if name and exec_cmd and not no_disp=='true':
                     exec_cmd=exec_cmd.split()[0]
                     apps[name.lower()]={"Exec":exec_cmd}
+                    if kill_name:
+                         apps[name.lower()]['Name']=kill_name                          #Hardcoded killname chrome for killing chrome processes
 
         config=path(project_root/'config')
         os.makedirs(name=config,exist_ok=True)

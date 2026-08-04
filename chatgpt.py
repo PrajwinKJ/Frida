@@ -1,13 +1,13 @@
 import os
 from dotenv import load_dotenv
 from openai  import OpenAI
-from core.schema import tool_registry
-import utils.apps
+from core.oopschema import registry
+import utils.appsoop
 import json
 
-tools=[tools['schema'] for tools in tool_registry.values()]
-
-
+features=[]
+for i in registry.values():
+    features.extend(i['schemas'])
 load_dotenv('config/.env')
 client = OpenAI(
     api_key=os.getenv('groq_key'),
@@ -18,25 +18,26 @@ while True:
     user=input("You: ")
     if user.lower()=='exit':
         break
-    chat_completion = client.chat.completions.create(
-    model="openai/gpt-oss-20b",
-    messages=[
-        {
-            "role": "user",
-            "content": user
-        }
-    ],
-    tools=tools,
-    tool_choice="auto"
-)
 
+    chat_completion = client.chat.completions.create(
+            model="openai/gpt-oss-20b",
+            messages=[
+                {
+                    "role": "user",
+                    "content": user
+                }
+            ],
+            tools=features,
+            tool_choice="auto"
+        )
     chat=chat_completion.choices[0].message
-    arguments=chat.tool_calls
-    if arguments:
-        fn=arguments[0].function.name
-        arg=json.loads(arguments[0].function.arguments)
-        reply=tool_registry[fn]['function'](arg['app_name'])
-        if reply:
-            print(f"{reply}")
+    if chat.tool_calls:
+        fn=chat.tool_calls[0].function
+        arg=json.loads(fn.arguments)
+        name=fn.name
+        plugin,method=name.split('::',1)
+        instance=registry[plugin]['instance']
+        exe=getattr(instance,method)
+        exe(**arg)
     else:
-        print(f"Jarvis: {chat.content}")
+        print(f"Frida: {chat.content}")
