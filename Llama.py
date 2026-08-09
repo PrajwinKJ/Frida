@@ -35,4 +35,4 @@ while True:
             print(arg)
             tool_registry[fn]['function'](arg['app_name'])
         else:
-            print(f"Jarvis: {chat.content}")
+            print(f"Frida: {chat.content}")
