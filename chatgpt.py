@@ -8,9 +8,13 @@ import json
 features=[]
 for i in registry.values():
     features.extend(i['schemas'])
-load_dotenv('config/.env')
+try:
+    load_dotenv('config/.env')
+except Exception as e:
+    print(f"Error occurred while loading environment variables: {e}")
+    
 client = OpenAI(
-    api_key=os.getenv('groq_key'),
+    api_key=os.getenv('groq'),
     base_url="https://api.groq.com/openai/v1",
 )
 

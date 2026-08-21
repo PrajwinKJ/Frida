@@ -8,12 +8,23 @@ from core.oopschema import Tool
 import os
 import shutil
 
-log_file=path(__file__).resolve().parent.parent/"logs/apps.log"
-logging.basicConfig(filename=log_file,level=logging.INFO,format="%(asctime)s | %(levelname)s | %(message)s")
+try:
+    log_folder=path(__file__).resolve().parent.parent/"logs/"
+    os.makedirs(log_folder, exist_ok=True)
+except Exception as e:
+    print(f"Error occurred while creating log folder: {e}")
+
+logging.basicConfig(filename=log_folder/"apps.log",level=logging.INFO,format="%(asctime)s | %(levelname)s | %(message)s")
 pdir=path(__file__).resolve().parent.parent
 app_path=pdir/"config/apps.json"
-with open(app_path,'r') as file:
-            ins=json.load(file)
+try:
+    with open(app_path,'r') as file:
+        ins=json.load(file)
+except FileNotFoundError:
+    logging.warning("apps.json not found in config")
+    scan_apps()
+    with open(app_path,'r') as file:
+        ins=json.load(file)
 
 @Tool()
 class Apps:
