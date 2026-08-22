@@ -15,7 +15,7 @@ def engines(provider):
         return func
     return name
 
-@engines("Groq")
+@engines("groq")
 class openai_20b:
     def __init__(self,api_key):
         self.key=api_key
@@ -36,7 +36,25 @@ class openai_20b:
             reasoning_effort='low'
         )
         return completion.choices[0].message
-print(models)
-engine=openai_20b()
-response=engine.response()
-print(response.)
+
+@engines("nvidia")
+class nemotron:
+    def __init__(self,api_key):
+        self.key=api_key
+        self.client = OpenAI(
+        api_key=self.key,
+        base_url="https://api.groq.com/openai/v1",
+        )
+
+    def response(self):
+        completion=self.client.chat.completions.create(
+            model="nvidia/nemotron-20b",
+            messages=[
+                {
+                    "role": "user",
+                    "content": 'hello',
+                }
+            ],
+            reasoning_effort='low'
+        )
+        return completion.choices[0].message

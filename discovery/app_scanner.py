@@ -40,5 +40,5 @@ def scan_apps():
     except:
         logging.exception('Scanning Failed')
 
-if __name__=="__main__":
+if __name__=="main":
      scan_apps()

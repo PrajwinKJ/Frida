@@ -37,7 +37,7 @@ class Apps:
             if not app_path.exists():
                 scan_apps()
             for i in ins.keys():
-                if app_name==i:
+                if app_name in i or  i in app_name:
                     if shutil.which(app_name):
                         exec_name=shutil.which(app_name)
                     else:
@@ -59,7 +59,7 @@ class Apps:
         with open(app_path,'r') as file:
             apps=json.load(file)
         for i in apps.keys():
-            if app_name==i:
+            if app_name in i or i in app_name:
                 try :
                     app_name=apps[i]['Name']
                     
