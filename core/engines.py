@@ -7,15 +7,16 @@ def create_client(key):
     base_url="https://api.groq.com/openai/v1",
 )
 
-def engines(provider):
+def provider(provider):
     def name(func):
         models[func.__name__]={
-            'provider':provider
+            'provider':provider,
+            'object':func
         }
         return func
     return name
 
-@engines("groq")
+@provider("groq")
 class openai_20b:
     def __init__(self,api_key):
         self.key=api_key
@@ -24,20 +25,20 @@ class openai_20b:
         base_url="https://api.groq.com/openai/v1",
         )
 
-    def response(self):
+    def response(self,user):
         completion=self.client.chat.completions.create(
             model="openai/gpt-oss-20b",
             messages=[
                 {
                     "role": "user",
-                    "content": 'hello',
+                    "content": user,
                 }
             ],
             reasoning_effort='low'
         )
         return completion.choices[0].message
 
-@engines("nvidia")
+@provider("nvidia")
 class nemotron:
     def __init__(self,api_key):
         self.key=api_key
@@ -46,13 +47,13 @@ class nemotron:
         base_url="https://api.groq.com/openai/v1",
         )
 
-    def response(self):
+    def response(self,user):
         completion=self.client.chat.completions.create(
             model="nvidia/nemotron-20b",
             messages=[
                 {
                     "role": "user",
-                    "content": 'hello',
+                    "content": user,
                 }
             ],
             reasoning_effort='low'
