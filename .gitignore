@@ -5,3 +5,7 @@ __pycache__
 /websockets 
 *.ipynb
 .env
+*.csv
+/Datas
+Intent_Engine_
+*.json
