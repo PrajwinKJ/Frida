@@ -5,16 +5,26 @@ import torch.nn as nn
 from torch.utils.data import DataLoader,TensorDataset
 import torch.optim as optim
 import Intent_Engine as ie
+import json
 
+path=input("Enter Path of Training Data: ")
 data=pd.read_csv('/home/prajwinkj/VSCode/Frida/models/Intent_engine/Datas/data1081.csv')
 tokenizer=tiktoken.get_encoding('gpt2')
 torch.manual_seed(42)
 
+with open('/home/prajwinkj/VSCode/Frida/models/Intent_engine/Model_blocks/config/config.json','r') as f:
+    config=json.load(f)
+
+embed_dim=config['embed_dim']
+context_len=config['context_len']
+classes=config['classes']
+pad_id=config['pad_id']
+
 def tokenize(text):
     token=tokenizer.encode(text)
     attention_mask=[1]*len(token)
-    attention_mask+=[0]*(512-len(token))
-    token+=[tokenizer.n_vocab]*(512-len(token))
+    attention_mask+=[0]*(context_len-len(token))
+    token+=[pad_id]*(context_len-len(token))
     return token,attention_mask
 
 data[['token','attention_mask']]=data['text'].apply(lambda x: pd.Series(tokenize(x)))
@@ -43,7 +53,7 @@ test_loader=DataLoader(test_dataset,100,False)
 device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using {device}")
 
-model=ie.IntentEngine(tokenizer=tokenizer,embed_dim=128,context_len=512,classes=2).to(device)
+model=ie.IntentEngine(tokenizer=tokenizer,embed_dim=embed_dim,context_len=context_len,classes=classes).to(device)
 loss_fn=nn.CrossEntropyLoss()
 optimizer=optim.AdamW(model.parameters(),lr=0.0001)
 
