@@ -3,6 +3,8 @@ import configparser
 import json
 import logging
 import os
+import subprocess
+import re
 
 def scan_apps():
     project_root=path(__file__).resolve().parent.parent
@@ -15,6 +17,15 @@ def scan_apps():
 
     try:
         logging.info('Scanning Installed Applications...')
+
+        flatpak_apps=subprocess.run(["flatpak","list","--app","--columns=name,application"],capture_output=True,text=True,check=True).stdout
+        result=re.split(r"[\t\n]",flatpak_apps)
+        ftpk_name=[i for i in result if not i.startswith("com")]
+        ftpk_command=[i for i in result if i.startswith("com")]
+
+        for i in range(len(ftpk_name)-1):
+             apps[ftpk_name[i].lower()]={"Exec":ftpk_command[i],
+                                         "Flatpak":True}
 
         for file in app_path.glob("*.desktop"):
             parser=configparser.ConfigParser(interpolation=None)
@@ -40,5 +51,5 @@ def scan_apps():
     except:
         logging.exception('Scanning Failed')
 
-if __name__=="main":
+if __name__=="__main__":
      scan_apps()
